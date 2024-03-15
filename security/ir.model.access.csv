@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+mo_extension,mo_extension,model_mo_extension,base.group_user,1,1,1,1
+material_occurrence,material_occurrence,model_material_occurrence,base.group_user,1,1,1,1
+production_request,production_request,model_production_request,base.group_user,1,1,1,1
+project_info,project_info,model_project_info,base.group_user,1,1,1,1
+cutting_plan,cutting_plan,model_cutting_plan,base.group_user,1,1,1,1
+arquive_cutting_plan,arquive_cutting_plan,model_arquive_cutting_plan,base.group_user,1,1,1,1project_info

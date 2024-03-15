@@ -1,0 +1,55 @@
+<odoo>
+    <record id="mo_extension_action" model="ir.actions.act_window">
+        <field name="name">Ordem de Fabricação</field>
+        <field name="res_model">mo.extension</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="mo_extension_menu" name="Ordem de Fabricação" parent="mrp.menu_mrp_manufacturing"
+              action="mo_extension_action"/>
+
+    <record id="mo_extension_tree_view" model="ir.ui.view">
+        <field name="name">Ordem de Fabricação</field>
+        <field name="model">mo.extension</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="mrp_production_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mo_extension_form_view" model="ir.ui.view">
+        <field name="name">Ordem de Fabricação</field>
+        <field name="model">mo.extension</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="mrp_production_id"/>
+                    </group>
+                    <field name="workorder_ids" force_save="True">
+                        <tree>
+                            <field name="operation_id"/>
+                            <field name="workcenter_id" invisible="1"/>
+                            <field name="date_planned_start" invisible="1"/>
+                            <field name="production_state" invisible="1"/>
+                            <field name="working_state" invisible="1"/>
+                            <field name="is_user_working" invisible="1"/>
+                            <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state not in ('done', 'cancel')" attrs="{'invisible': [('production_state', 'in', ('draft', 'done'))]}"/>
+                            <button name="button_start" type="object" string="Iniciar" class="btn-success"
+                              attrs="{'invisible': ['|', '|', '|', ('production_state','in', ('draft', 'done', 'cancel')), ('working_state', '=', 'blocked'), ('state', '=', 'done'), ('is_user_working', '!=', False)]}"/>
+                            <button name="button_pending" type="object" string="Pausar" class="btn-warning"
+                              attrs="{'invisible': ['|', '|', ('production_state', 'in', ('draft', 'done', 'cancel')), ('working_state', '=', 'blocked'), ('is_user_working', '=', False)]}"/>
+                            <button name="button_finish" type="object" string="Finalizar" class="btn-success"
+                              attrs="{'invisible': ['|', '|', ('production_state', 'in', ('draft', 'done', 'cancel')), ('working_state', '=', 'blocked'), ('is_user_working', '=', False)]}"/>
+                            <button name="%(mrp.act_mrp_block_workcenter_wo)d" type="action" string="Bloquear" context="{'default_workcenter_id': workcenter_id}" class="btn-danger"
+                              attrs="{'invisible': ['|', ('production_state', 'in', ('draft', 'done', 'cancel')), ('working_state', '=', 'blocked')]}"/>
+                            <button name="button_unblock" type="object" string="Desbloquear" context="{'default_workcenter_id': workcenter_id}" class="btn-danger"
+                              attrs="{'invisible': ['|', ('production_state', 'in', ('draft', 'done', 'cancel')), ('working_state', '!=', 'blocked')]}"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

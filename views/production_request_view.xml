@@ -1,0 +1,41 @@
+<odoo>
+    <record id="pcp_extension_request_action" model="ir.actions.act_window">
+        <field name="name">Solicitação de produção</field>
+        <field name="res_model">production.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="production_request_menu" name="Solicitação de produção" parent="mrp.menu_mrp_manufacturing"
+              action="pcp_extension_request_action"/>
+
+    <record id="pcp_extension_request_form_view" model="ir.ui.view">
+        <field name="name">Solicitação de produção</field>
+        <field name="model">production.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="name" readonly="1" style="font-size: 25px; font-weight: bold;"/>
+                    <group>
+                        <field name="project_info_ids">
+                            <tree editable="1">
+                                <field name="product_id"/>
+                                <field name="product_qty"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="pcp_extension_request_tree_view" model="ir.ui.view">
+        <field name="name">Solicitação de Produção - Árvore</field>
+        <field name="model">production.request</field>
+        <field name="arch" type="xml">
+            <tree string="Solicitação de Produção">
+                <field name="logged_in_user_id"/>
+                <field name="project_info_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

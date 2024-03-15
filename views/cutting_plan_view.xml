@@ -1,0 +1,66 @@
+<odoo>
+    <record id="pcp_extension_cutting_plan_action" model="ir.actions.act_window">
+        <field name="name">Plano de corte</field>
+        <field name="res_model">cutting.plan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="cutting_plan_menu" name="Plano de corte" parent="mrp.menu_mrp_manufacturing"
+              action="pcp_extension_cutting_plan_action"/>
+
+    <record id="pcp_extension_cutting_plan_form_view" model="ir.ui.view">
+        <field name="name">Plano de corte</field>
+        <field name="model">cutting.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" clickable="True"/>
+                </header>
+                <sheet>
+                    <field name="name" readonly="1" invisible="0" style="font-size: 25px; font-weight: bold;"/>
+
+                    <group>
+                        <group>
+                            <field name="production_request_id">
+                                <tree>
+                                    <field name="logged_in_user_id"/>
+                                    <field name="project_info_ids" widget="many2many_tags"/>
+                                    <field name="project_info_ids" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Solicitações de produção">
+                            <field name="project_info_ids">
+                                <tree editable="top">
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="product_qty" readonly="1"/>
+                                    <field name="production_request_id" readonly="0"/>
+                                    <field name="feedstock_product_id" readonly="0"/>
+                                    <field name="archive_pdf_cutting_plan_id" readonly="0"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pcp_extension_cutting_plan_tree_view" model="ir.ui.view">
+        <field name="name">Árvore de Plano de Corte</field>
+        <field name="model">cutting.plan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="project_info_ids" widget="many2many_tags"/>
+                <field name="production_request_related"/>
+                <field name="feedstock_product_related"/>
+                <field name="status" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

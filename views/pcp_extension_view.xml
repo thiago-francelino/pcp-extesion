@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="pcp_extension_menu_icon" name="Pcp Extension" web_icon="pcp_extension,static/description/icon.png"/>
+    </data>
+</odoo>

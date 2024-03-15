@@ -1,0 +1,14 @@
+<odoo>
+    <record id="mrp_bom_inherit_view" model="ir.ui.view">
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='component_template_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="product_tmpl_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
